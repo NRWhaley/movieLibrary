@@ -38,7 +38,9 @@ class App extends React.Component {
       <div>Movie List</div>
       <div>
         <button onClick={this.selectRandom}>Select Random</button>
-        <div>{this.state.randomMovie.name}</div>
+        <div className="randomFilm">
+          {this.state.randomMovie.name} {this.state.randomMovie.year}
+           {this.state.randomMovie.genre}</div>
 
         </div>
       {this.state.movies.map((movie) => (
