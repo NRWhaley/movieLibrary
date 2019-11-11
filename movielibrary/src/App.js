@@ -11,7 +11,7 @@ const appStyle = {
 
 class App extends React.Component {
   constructor(props){
-
+    super(props)
 
     this.state = {
       movies: movieList
@@ -24,10 +24,14 @@ class App extends React.Component {
 
   render(){
   return (
-    <div className="Entry" style={appStyle}>
-        <p>
-          <MovieEntry name={this.state.movies.name} year={this.state.movies.year} genre={this.state.movies.genre}/>
-        </p>
+    <div className="Entry" style={appStyle} >
+      {this.state.movies.map((movie) => (
+         <p>
+         <MovieEntry name={movie.name} year={movie.year} genre={movie.genre}/>
+         </p>
+
+      ))}
+
     </div>
   );
   }
