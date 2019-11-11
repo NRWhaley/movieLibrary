@@ -1,9 +1,11 @@
 import React from 'react';
 
 const entryStyle = {
+  color: 'black',
   backgroundColor: 'lightgrey',
-  maxWidth: '25%',
-  borderRadius: '5px'
+  maxWidth: '50%',
+  borderRadius: '5px',
+  alignContent: 'center'
 
 }
 

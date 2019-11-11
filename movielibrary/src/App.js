@@ -5,8 +5,11 @@ import movieList from './components/movieList.js'
 
 const appStyle = {
 
-  color: 'black',
-  borderRadius: '5px'
+  backgroundColor: 'black',
+  borderRadius: '5px',
+  color: 'red',
+  alignContent: 'center',
+  maxWidth: '50%'
 }
 
 class App extends React.Component {
@@ -14,17 +17,30 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      movies: movieList
+      movies: movieList,
+      randomMovie: ''
     }
+
+    this.selectRandom = this.selectRandom.bind(this)
   }
 
 
-
+  selectRandom(){
+    this.setState(state => ({
+      randomMovie : this.state.movies[Math.floor(Math.random() * Math.floor(this.state.movies.length - 1))]
+   }))
+}
 
 
   render(){
   return (
     <div className="Entry" style={appStyle} >
+      <div>Movie List</div>
+      <div>
+        <button onClick={this.selectRandom}>Select Random</button>
+        <div>{this.state.randomMovie.name}</div>
+
+        </div>
       {this.state.movies.map((movie) => (
          <p>
          <MovieEntry name={movie.name} year={movie.year} genre={movie.genre}/>
