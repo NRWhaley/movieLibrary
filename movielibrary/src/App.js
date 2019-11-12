@@ -3,7 +3,7 @@ import MovieEntry from './components/movieEntry.jsx'
 import movieList from './components/movieList.js'
 
 
-const greeting = 'hi file'
+
 const appStyle = {
 
   backgroundColor: 'black',
@@ -24,7 +24,7 @@ class App extends React.Component {
     }
 
     this.selectRandom = this.selectRandom.bind(this)
-
+    this.componentDidMount = this.componentDidMount.bind(this)
   }
 
 
@@ -32,22 +32,24 @@ class App extends React.Component {
     this.setState(state => ({
       randomMovie : this.state.movies[Math.floor(Math.random() * Math.floor(this.state.movies.length - 1))]
    }))
+   console.log(this.state.data)
 }
 
 componentDidMount() {
   // Call our fetch function below once the component mounts
 this.callBackendAPI()
   .then(res => this.setState({ data: res.express }))
-  .catch(err => console.log(err));
+  .catch(err => console.log('not working'));
 }
 // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
 callBackendAPI = async () => {
-const response = await fetch('/');
+const response = await fetch('/express');
 const body = await response.json();
 
 if (response.status !== 200) {
   throw Error(body.message)
 }
+
 return body;
 };
 
@@ -56,6 +58,7 @@ return body;
   return (
     <div className="Entry" style={appStyle} >
       <div>Movie List</div>
+      <div>{this.state.data}</div>
       <div>
         <button onClick={this.selectRandom}>Select Random</button>
         <div className="randomFilm">
