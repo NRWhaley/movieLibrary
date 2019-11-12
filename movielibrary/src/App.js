@@ -18,12 +18,8 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      data: null,
-      movies: [
-        {name: '', year: '', genre: ''},
-        {name: '', year: '', genre: '' },
-        {name: '', year: '', genre: ''}
-      ],
+      data: '',
+      movies: '',
       randomMovie: ''
     }
 
@@ -33,28 +29,25 @@ class App extends React.Component {
   }
 
 
-  selectRandom(){
-    this.setState(state => ({
-      randomMovie : this.state.movies[Math.floor(Math.random() * Math.floor(this.state.movies.length - 1))]
-   }))
-   console.log(this.state.data)
-    }
 
 componentDidMount() {
 
-
-
     this.addMovie()
-      .then(res => this.setState({ movies: res}))
-      .catch(err => console.log(err));
+      .then(res => this.setState({movies: res.list}
+      ))
 
-
-
+      .catch(err => console.log(err))
 
 }
 
 
 
+selectRandom(){
+  this.setState((state) => ({
+    randomMovie : this.state.movies[Math.floor(Math.random() * Math.floor(this.state.movies.length - 1))]
+ }))
+
+  }
 
 
 addMovie = async () => {
@@ -63,6 +56,7 @@ addMovie = async () => {
   if(response.status !== 200) {
     throw Error(body.message)
   }
+
   return body
 }
 

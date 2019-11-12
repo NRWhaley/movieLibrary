@@ -20,8 +20,8 @@ app.get('/express', (req, res) => {
 app.get('/list', (req, res) =>
 {
   fse.readFile('./movieList.js', 'utf8', (err, data) => {
-    let parsedList = JSON.parse(data)
-    res.send(parsedList)
+
+    res.send({list: data})
   })
 
 
