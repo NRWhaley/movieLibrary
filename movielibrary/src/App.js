@@ -1,5 +1,5 @@
 import React from 'react';
-import MovieEntry from './components/movieEntry.jsx';
+import MovieList from './components/movieList.jsx';
 
 
 
@@ -25,6 +25,7 @@ class App extends React.Component {
 
     this.selectRandom = this.selectRandom.bind(this)
     this.componentDidMount = this.componentDidMount.bind(this)
+    this.addMovie = this.addMovie.bind(this)
 
   }
 
@@ -65,25 +66,12 @@ addMovie = async () => {
   render() {
   return (
     <div className="Entry" style={appStyle}>
-      <div>Movie List</div>
-      <div>{this.state.data}</div>
+
       <div>
-        <button onClick={this.selectRandom}>Select Random</button>
-        <div>
-          {this.state.randomMovie.name} {this.state.randomMovie.year}
-          {this.state.randomMovie.genre}
-        </div>
+        <MovieList list={this.state.movies} />
       </div>
 
-
-
-      {this.state.movies.map((movie) => (
-
-         <MovieEntry name={movie.name} year={movie.year} genre={movie.genre}/>
-
-      ))}
-
-    </div>
+     </div>
   );
   }
 }
