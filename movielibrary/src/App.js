@@ -5,7 +5,6 @@ import MovieEntry from './components/movieEntry.jsx'
 
 
 const appStyle = {
-
   backgroundColor: 'black',
   borderRadius: '5px',
   color: 'red',
@@ -59,7 +58,7 @@ return body;
 
 retrieveMovies() {
 this.addMovie()
-.then(res => this.setState({ movies: res.express }))
+.then(res => this.setState({ movies: res.films }))
 .catch(err => console.log(err));
 }
 

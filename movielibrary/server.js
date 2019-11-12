@@ -18,5 +18,5 @@ app.get('/express', (req, res) => {
 
 app.get('/list', (req, res) =>
 {
-  res.send({express: movies})
+  res.send({films: movies})
 });
