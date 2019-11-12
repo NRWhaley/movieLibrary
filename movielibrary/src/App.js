@@ -25,6 +25,7 @@ class App extends React.Component {
 
     this.selectRandom = this.selectRandom.bind(this)
     this.componentDidMount = this.componentDidMount.bind(this)
+    this.retrieveMovies = this.retrieveMovies.bind(this)
   }
 
 
@@ -36,15 +37,18 @@ class App extends React.Component {
 }
 
 componentDidMount() {
-  // Call our fetch function below once the component mounts
+
 this.callBackendAPI()
   .then(res => this.setState({ data: res.express }))
-  .catch(err => console.log('not working'));
+  .catch(err => console.log(err));
+
+
 }
-// Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
+
+
 callBackendAPI = async () => {
-const response = await fetch('/express');
-const body = await response.json();
+let response = await fetch('/express');
+let body = await response.json();
 
 if (response.status !== 200) {
   throw Error(body.message)
@@ -53,6 +57,20 @@ if (response.status !== 200) {
 return body;
 };
 
+retrieveMovies() {
+this.addMovie()
+.then(res => this.setState({ data: res.express }))
+.catch(err => console.log(err));
+}
+
+addMovie = async () => {
+  let response = await fetch('/list');
+  let body = await response.json();
+  if(response.status !== 200) {
+    throw Error(body.message)
+  }
+  return body
+}
 
   render(){
   return (
@@ -66,7 +84,7 @@ return body;
            {this.state.randomMovie.genre}</div>
 
         </div>
-        <button onClick={this.fileWrite}>Save</button>
+        <button onClick={this.retrieveMovies}>Save</button>
       {this.state.movies.map((movie) => (
          <p>
          <MovieEntry name={movie.name} year={movie.year} genre={movie.genre}/>
