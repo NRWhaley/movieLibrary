@@ -42,7 +42,7 @@ componentDidMount() {
         let obj = {}
         for(let x = 0; x < splitContent.length; x++){
           let halves = splitContent[x].split(':')
-          obj[halves[0]] = halves[1]
+          obj[halves[0].replace(/"/, '').trim()] = halves[1].replace(/"/, '').trim()
         }
         newList.push(obj)
       }
