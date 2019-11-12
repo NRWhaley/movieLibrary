@@ -12,4 +12,4 @@ const movieList = [
 
 
 
-export default movieList;
+module.exports.movieList = movieList;

@@ -1,6 +1,6 @@
 import React from 'react';
 import MovieEntry from './components/movieEntry.jsx'
-import movieList from './components/movieList.js'
+
 
 
 
@@ -19,7 +19,7 @@ class App extends React.Component {
 
     this.state = {
       data: null,
-      movies: movieList,
+      movies: '',
       randomMovie: ''
     }
 
@@ -59,7 +59,7 @@ return body;
 
 retrieveMovies() {
 this.addMovie()
-.then(res => this.setState({ data: res.express }))
+.then(res => this.setState({ movies: res.express }))
 .catch(err => console.log(err));
 }
 
