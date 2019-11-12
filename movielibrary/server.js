@@ -1,5 +1,6 @@
 
 const movies = require('./movieList.js')
+const fse = require('fs-extra')
 
 const express = require('express');
 const app = express();
@@ -18,5 +19,10 @@ app.get('/express', (req, res) => {
 
 app.get('/list', (req, res) =>
 {
-  res.send({films: movies})
+  fse.readFile('./movieList.js', 'utf8', (err, data) => {
+    let parsedList = JSON.parse(data)
+    res.send(parsedList)
+  })
+
+
 });

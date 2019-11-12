@@ -45,7 +45,7 @@ componentDidMount() {
 
 
     this.addMovie()
-      .then(res => this.setState({ movies: res.films.movieList}))
+      .then(res => this.setState({ movies: res}))
       .catch(err => console.log(err));
 
 
@@ -54,20 +54,6 @@ componentDidMount() {
 }
 
 
-// this.callBackendAPI()
-//   .then(res => this.setState({ data: res.express }))
-//   .catch(err => console.log(err));
-
-// callBackendAPI = async () => {
-// let response = await fetch('/express');
-// let body = await response.json();
-
-// if (response.status !== 200) {
-//   throw Error(body.message)
-// }
-
-// return body;
-// };
 
 
 
