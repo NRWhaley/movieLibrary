@@ -45,7 +45,7 @@ componentDidMount() {
 
 
     this.addMovie()
-      .then(res => this.setState({ movies: res.films}))
+      .then(res => this.setState({ movies: res.films.movieList}))
       .catch(err => console.log(err));
 
 
