@@ -1,5 +1,6 @@
 import React from 'react';
-import MovieEntry from './components/movieEntry.jsx'
+import MovieEntry from './components/movieEntry.jsx';
+
 
 
 
@@ -18,13 +19,17 @@ class App extends React.Component {
 
     this.state = {
       data: null,
-      movies: '',
+      movies: [
+        {name: '', year: '', genre: ''},
+        {name: '', year: '', genre: '' },
+        {name: '', year: '', genre: ''}
+      ],
       randomMovie: ''
     }
 
     this.selectRandom = this.selectRandom.bind(this)
     this.componentDidMount = this.componentDidMount.bind(this)
-    this.retrieveMovies = this.retrieveMovies.bind(this)
+
   }
 
 
@@ -33,34 +38,38 @@ class App extends React.Component {
       randomMovie : this.state.movies[Math.floor(Math.random() * Math.floor(this.state.movies.length - 1))]
    }))
    console.log(this.state.data)
-}
+    }
 
 componentDidMount() {
 
-this.callBackendAPI()
-  .then(res => this.setState({ data: res.express }))
-  .catch(err => console.log(err));
+
+
+    this.addMovie()
+      .then(res => this.setState({ movies: res.films}))
+      .catch(err => console.log(err));
+
+
 
 
 }
 
 
-callBackendAPI = async () => {
-let response = await fetch('/express');
-let body = await response.json();
+// this.callBackendAPI()
+//   .then(res => this.setState({ data: res.express }))
+//   .catch(err => console.log(err));
 
-if (response.status !== 200) {
-  throw Error(body.message)
-}
+// callBackendAPI = async () => {
+// let response = await fetch('/express');
+// let body = await response.json();
 
-return body;
-};
+// if (response.status !== 200) {
+//   throw Error(body.message)
+// }
 
-retrieveMovies() {
-this.addMovie()
-.then(res => this.setState({ movies: res.films }))
-.catch(err => console.log(err));
-}
+// return body;
+// };
+
+
 
 addMovie = async () => {
   let response = await fetch('/list');
@@ -71,19 +80,21 @@ addMovie = async () => {
   return body
 }
 
-  render(){
+  render() {
   return (
-    <div className="Entry" style={appStyle} >
+    <div className="Entry" style={appStyle}>
       <div>Movie List</div>
       <div>{this.state.data}</div>
       <div>
         <button onClick={this.selectRandom}>Select Random</button>
         <div className="randomFilm">
           {this.state.randomMovie.name} {this.state.randomMovie.year}
-           {this.state.randomMovie.genre}</div>
-
+           {this.state.randomMovie.genre}
         </div>
-        <button onClick={this.retrieveMovies}>Save</button>
+      </div>
+
+
+
       {this.state.movies.map((movie) => (
          <p>
          <MovieEntry name={movie.name} year={movie.year} genre={movie.genre}/>

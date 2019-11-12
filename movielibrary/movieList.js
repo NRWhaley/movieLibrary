@@ -10,6 +10,6 @@ const movieList = [
   {name: 'Raiders of the Lost Ark', year: '1981', genre: 'Action'}
 ]
 
-
+// export default movieList;
 
 module.exports.movieList = movieList;
