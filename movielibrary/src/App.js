@@ -1,6 +1,6 @@
 import React from 'react';
 import MovieList from './components/movieList.jsx';
-
+const axios = require('axios');
 
 
 
@@ -32,14 +32,36 @@ class App extends React.Component {
 
 
 componentDidMount() {
+    axios.get('/list')
+    .then(res => {
+      let split = res.data.split('-')
+      let newList = []
+      for(let i = 0; i < split.length; i++){
+        let content = split[i].slice(1, split[i].length - 1)
+        let splitContent = content.split(',')
+        let obj = {}
+        for(let x = 0; x < splitContent.length; x++){
+          let halves = splitContent[x].split(':')
+          obj[halves[0]] = halves[1]
+        }
+        newList.push(obj)
+      }
+      console.log(newList)
+      this.setState((state) => ({
+        movies: newList
+      }))
 
-    this.addMovie()
-      .then(res =>
 
-        this.setState({movies: res})
-      )
+    })
 
-      .catch(err => console.log(err))
+    .catch(err => console.log(err))
+    // this.addMovie()
+    //   .then(res =>
+
+    //     this.setState({movies: res})
+    //   )
+
+    //   .catch(err => console.log(err))
 
 }
 
@@ -66,7 +88,7 @@ addMovie = async () => {
   render() {
   return (
     <div className="Entry" style={appStyle}>
-
+      <header>Movie List</header>
       <div>
         <MovieList list={this.state.movies} />
       </div>
