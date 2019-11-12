@@ -2,7 +2,6 @@ import React from 'react';
 import MovieEntry from './components/movieEntry.jsx'
 import movieList from './components/movieList.js'
 
-const fs = require('fs-extra')
 
 const greeting = 'hi file'
 const appStyle = {
@@ -19,12 +18,13 @@ class App extends React.Component {
     super(props)
 
     this.state = {
+      data: null,
       movies: movieList,
       randomMovie: ''
     }
 
     this.selectRandom = this.selectRandom.bind(this)
-    this.fileWrite = this.fileWrite.bind(this)
+
   }
 
 
@@ -34,12 +34,22 @@ class App extends React.Component {
    }))
 }
 
-  componentWillMount(){
-    fs.write('message.txt', greeting, 'utf8', (err) => {
-      if (err) throw err;
-      console.log('The file has been saved!');
-    });
-  }
+componentDidMount() {
+  // Call our fetch function below once the component mounts
+this.callBackendAPI()
+  .then(res => this.setState({ data: res.express }))
+  .catch(err => console.log(err));
+}
+// Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
+callBackendAPI = async () => {
+const response = await fetch('/');
+const body = await response.json();
+
+if (response.status !== 200) {
+  throw Error(body.message)
+}
+return body;
+};
 
 
   render(){
