@@ -19,8 +19,8 @@ class App extends React.Component {
 
     this.state = {
       data: '',
-      movies: '',
-      randomMovie: ''
+      movies: [{name: '', year: '', genre: ''}, {name: '', year: '', genre: ''}, {name: '', year: '', genre: ''}],
+      randomMovie: {name: '', year: '', genre: ''}
     }
 
     this.selectRandom = this.selectRandom.bind(this)
@@ -33,8 +33,10 @@ class App extends React.Component {
 componentDidMount() {
 
     this.addMovie()
-      .then(res => this.setState({movies: res.list}
-      ))
+      .then(res =>
+
+        this.setState({movies: res})
+      )
 
       .catch(err => console.log(err))
 
@@ -67,18 +69,17 @@ addMovie = async () => {
       <div>{this.state.data}</div>
       <div>
         <button onClick={this.selectRandom}>Select Random</button>
-        <div className="randomFilm">
+        <div>
           {this.state.randomMovie.name} {this.state.randomMovie.year}
-           {this.state.randomMovie.genre}
+          {this.state.randomMovie.genre}
         </div>
       </div>
 
 
 
       {this.state.movies.map((movie) => (
-         <p>
+
          <MovieEntry name={movie.name} year={movie.year} genre={movie.genre}/>
-         </p>
 
       ))}
 

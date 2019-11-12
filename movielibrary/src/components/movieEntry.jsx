@@ -9,25 +9,17 @@ const entryStyle = {
 
 }
 
-class MovieEntry extends React.Component {
+function MovieEntry(props) {
 
-  render(){
     return (
       <div className="movieEntry" style={entryStyle}>
-      <div>{this.props.name}</div>
-      <div>Year: {this.props.year}</div>
-      <div>Genre: {this.props.genre}</div>
+      <div>{props.name}</div>
+      <div>Year: {props.year}</div>
+      <div>Genre: {props.genre}</div>
       </div>
     )
 
-
-
-  }
-
-
-
-}
-
+ }
 
 
 export default MovieEntry;
