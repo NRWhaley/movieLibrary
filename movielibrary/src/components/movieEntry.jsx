@@ -10,7 +10,7 @@ const entryStyle = {
 }
 
 function MovieEntry(props) {
-  console.log(props)
+
     return (
       <div className="movieEntry" style={entryStyle}>
       <div>{props.name}</div>

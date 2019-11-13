@@ -1,5 +1,6 @@
 import React from 'react';
 import MovieList from './components/movieList.jsx';
+import MovieEntry from './components/movieEntry.jsx'
 const axios = require('axios');
 
 
@@ -18,7 +19,6 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      data: '',
       movies: [{name: '', year: '', genre: ''}, {name: '', year: '', genre: ''}, {name: '', year: '', genre: ''}],
       randomMovie: {name: '', year: '', genre: ''}
     }
@@ -71,6 +71,7 @@ componentDidMount() {
 
 
 selectRandom(){
+  // console.log(this.state.movies[Math.floor(Math.random() * Math.floor(this.state.movies.length - 1))])
   this.setState((state) => ({
     randomMovie : this.state.movies[Math.floor(Math.random() * Math.floor(this.state.movies.length - 1))]
  }))
@@ -89,9 +90,17 @@ addMovie = async () => {
 }
 
   render() {
-  return (
+
+
+    return (
     <div className="Entry" style={appStyle}>
       <header>Movie List</header>
+      <button onClick = {this.selectRandom}>Select Random</button>
+      <MovieEntry
+      name={this.state.randomMovie.name}
+      year={this.state.randomMovie.year}
+      genre={this.state.randomMovie.genre}
+        />
       <div>
         <MovieList list={this.state.movies} />
       </div>
