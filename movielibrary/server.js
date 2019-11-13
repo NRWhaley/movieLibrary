@@ -32,9 +32,19 @@ app.get('/list', (req, res) =>
 
 app.post('/updateList', urlencodedParse, (req, res) => {
 
-  let newList = req.body
-  console.log(req.body)
+  let newList = Object.keys(req.body)[0]
 
-  res.send('Movies updated')
+  console.log(newList)
+  fse.writeFile('newList.txt', newList, (err) => {
+
+    if (err) throw err;
+
+    res.send('Movies updated')
+
+  })
+
+
+
+
 
 })
