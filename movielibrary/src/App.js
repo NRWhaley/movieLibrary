@@ -91,6 +91,24 @@ addMovie = async () => {
 
   render() {
 
+    let stringList = []
+
+    for(let i = 0; i < this.state.movies.length; i++){
+      stringList.push(JSON.stringify(this.state.movies[i]))
+    }
+
+    axios.post('/updateList', {
+      body: stringList.join('-')
+    })
+    .then((response) => {
+      console.log(response);
+    }, (error) => {
+      console.log(error);
+    });
+
+      console.log(stringList.join('-'))
+
+
 
     return (
     <div className="Entry" style={appStyle}>
