@@ -96,7 +96,8 @@ addMovie = async () => {
     for(let i = 0; i < this.state.movies.length; i++){
       stringList.push(JSON.stringify(this.state.movies[i]))
     }
-    console.log(stringList)
+
+
 
     axios({
       method: 'post',
