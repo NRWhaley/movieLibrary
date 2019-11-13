@@ -96,17 +96,21 @@ addMovie = async () => {
     for(let i = 0; i < this.state.movies.length; i++){
       stringList.push(JSON.stringify(this.state.movies[i]))
     }
+    console.log(stringList)
 
-    axios.post('/updateList', {
-      body: stringList.join('-')
-    })
+    axios({
+      method: 'post',
+      url: '/updateList',
+      data: stringList.join('-'),
+      config: { headers: {'Content-Type': 'multipart/form-data' }}
+      })
     .then((response) => {
-      console.log(response);
+      console.log(response.data);
     }, (error) => {
       console.log(error);
     });
 
-      console.log(stringList.join('-'))
+
 
 
 

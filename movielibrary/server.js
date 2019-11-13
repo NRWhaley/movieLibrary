@@ -30,6 +30,8 @@ app.get('/list', (req, res) =>
 
 app.post('/updateList', (req, res) => {
 
+  console.log(req.data)
 
+  res.send('Movies updated')
 
 })
