@@ -5,7 +5,7 @@ const entryStyle = {
   backgroundColor: 'lightgrey',
   maxWidth: '50%',
   borderRadius: '5px',
-  alignContent: 'center'
+  align: 'center'
 
 }
 
