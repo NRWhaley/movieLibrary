@@ -46,11 +46,13 @@ componentDidMount() {
         }
         newList.push(obj)
       }
-      console.log(newList)
 
-      this.setState((state) => ({
+
+      this.setState((state) =>
+      ({
         movies: newList
-     }));
+        })
+      );
 
 
     })

@@ -6,9 +6,7 @@ import MovieEntry from './movieEntry.jsx';
 class MovieList extends React.Component {
   constructor(props){
     super(props)
-    this.state = {
-      list: props.list
-    }
+
 
 
 
@@ -16,10 +14,12 @@ class MovieList extends React.Component {
 
 
   render(){
+
+
     return(
 
       <div>
-    {this.state.list.map((movie) => (
+    {this.props.list.map((movie) => (
         <MovieEntry name={movie.name} year={movie.year} genre={movie.genre} />
     ))}
     </div>
