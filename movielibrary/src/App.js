@@ -19,7 +19,7 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      movies: [{name: '', year: '', genre: ''}, {name: '', year: '', genre: ''}, {name: '', year: '', genre: ''}],
+      movies: [{name: 'default', year: '', genre: ''}, {name: '', year: '', genre: ''}, {name: '', year: '', genre: ''}],
       randomMovie: {name: '', year: '', genre: ''}
     }
 
@@ -34,7 +34,9 @@ class App extends React.Component {
 componentDidMount() {
     axios.get('/list')
     .then(res => {
+
       let split = res.data.split('-')
+      console.log(split)
       let newList = []
       for(let i = 0; i < split.length; i++){
         let content = split[i].slice(1, split[i].length - 2)
@@ -58,20 +60,14 @@ componentDidMount() {
     })
 
     .catch(err => console.log(err))
-    // this.addMovie()
-    //   .then(res =>
 
-    //     this.setState({movies: res})
-    //   )
-
-    //   .catch(err => console.log(err))
 
 }
 
 
 
 selectRandom(){
-  // console.log(this.state.movies[Math.floor(Math.random() * Math.floor(this.state.movies.length - 1))])
+
   this.setState((state) => ({
     randomMovie : this.state.movies[Math.floor(Math.random() * Math.floor(this.state.movies.length - 1))]
  }))
@@ -89,15 +85,17 @@ addMovie = async () => {
   return body
 }
 
+
+
+
   render() {
 
+    if(this.state.movies[0].name != 'default'){
     let stringList = []
 
     for(let i = 0; i < this.state.movies.length; i++){
       stringList.push(JSON.stringify(this.state.movies[i]))
     }
-
-
 
     axios({
       method: 'post',
@@ -112,12 +110,15 @@ addMovie = async () => {
     });
 
 
-
+  }
 
 
     return (
     <div className="Entry" style={appStyle}>
       <header>Movie List</header>
+      <div>
+        <div>Add to collection</div>
+      </div>
       <button onClick = {this.selectRandom}>Select Random</button>
       <MovieEntry
       name={this.state.randomMovie.name}

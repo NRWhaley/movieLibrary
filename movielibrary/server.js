@@ -21,7 +21,7 @@ app.get('/express', (req, res) => {
 
 app.get('/list', (req, res) =>
 {
-  fse.readFile('./message.txt', 'utf8', (err, data) => {
+  fse.readFile('./newList.txt', 'utf8', (err, data) => {
 
     res.send(data)
   })
@@ -32,7 +32,7 @@ app.get('/list', (req, res) =>
 
 app.post('/updateList', urlencodedParse, (req, res) => {
 
-  let newList = Object.keys(req.body)[0]
+  let newList = Object.keys(req.body)[0].replace(/[&\/\\#+()$~%."*?<>]/g,'')
 
   console.log(newList)
   fse.writeFile('newList.txt', newList, (err) => {
