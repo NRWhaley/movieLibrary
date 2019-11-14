@@ -39,7 +39,7 @@ componentDidMount() {
       console.log(split)
       let newList = []
       for(let i = 0; i < split.length; i++){
-        let content = split[i].slice(1, split[i].length - 2)
+        let content = split[i].slice(1, split[i].length - 1)
         let splitContent = content.split(',')
         let obj = {}
         for(let x = 0; x < splitContent.length; x++){
