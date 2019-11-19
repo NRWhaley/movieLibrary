@@ -29,7 +29,8 @@ class App extends React.Component {
     this.selectRandom = this.selectRandom.bind(this)
     this.componentDidMount = this.componentDidMount.bind(this)
     this.addMovie = this.addMovie.bind(this)
-    this.addToCollection = this.addToCollection.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
 
   }
 
@@ -90,8 +91,10 @@ addMovie = async () => {
 }
 
 
-addToCollection() {
 
+
+handleSubmit(){
+  console.log('submitted!')
 }
 
 
@@ -126,23 +129,28 @@ return (
 
         <div>Add to collection</div>
     <div>
-    <form class="movie-submit">
+    <form class="movie-submit"
+    onSubmit = {this.handleSubmit}>
       <div class="movie-submit">
        <label for="name">Film name: </label>
-       <input type="text" name="name" id="name" value={this.state.newTitle} required></input>
+       <input type="text" name="name" id="newTitle"
+
+       required></input>
       </div>
       <div class="movie-submit">
         <label for="year">Year: </label>
-        <input type="year" value={this.state.newYear} name="year" id="year" required></input>
+        <input type="year"
+
+        name="year" id="newYear" required></input>
        </div>
   <div class="movie-submit">
     <label for="genre">Genre: </label>
-    <input type="text" value={this.state.newGenre} name="genre" id="genre" required></input>
+    <input type="text"
+    name="genre" id="newGenre" required></input>
   </div>
   <div class="movie-submit">
-    <input type="submit" value="Add film"
-    onClick = {this.addToCollection}
-    ></input>
+    <input type="submit" value="Add Film">
+    </input>
   </div>
 
 </form>
