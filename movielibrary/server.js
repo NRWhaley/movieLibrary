@@ -43,8 +43,5 @@ app.post('/updateList', urlencodedParse, (req, res) => {
 
   })
 
-
-
-
-
 })
+

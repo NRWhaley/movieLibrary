@@ -20,16 +20,12 @@ class App extends React.Component {
 
     this.state = {
       movies: [{name: 'default', year: '', genre: ''}, {name: '', year: '', genre: ''}, {name: '', year: '', genre: ''}],
-      randomMovie: {name: '', year: '', genre: ''},
-      newTitle: '',
-      newGenre: '',
-      newYear: ''
+      randomMovie: {name: '', year: '', genre: ''}
     }
 
     this.selectRandom = this.selectRandom.bind(this)
     this.componentDidMount = this.componentDidMount.bind(this)
     this.addMovie = this.addMovie.bind(this)
-    this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
 
   }
@@ -93,8 +89,28 @@ addMovie = async () => {
 
 
 
-handleSubmit(){
-  console.log('submitted!')
+handleSubmit(e){
+  e.preventDefault()
+  let newFilm = document.getElementById('newTitle').value;
+  let newYear = document.getElementById('newYear').value;
+  let newGenre = document.getElementById('newGenre').value;
+
+  let newEntry = {
+    name: newFilm,
+    genre: newGenre,
+    year: newYear
+  }
+
+
+
+
+  let originalList = this.state.movies
+  originalList.push(newEntry)
+  console.log(originalList)
+  this.setState((state) => ({
+    movies: originalList
+  }))
+
 }
 
 
@@ -129,8 +145,7 @@ return (
 
         <div>Add to collection</div>
     <div>
-    <form class="movie-submit"
-    onSubmit = {this.handleSubmit}>
+    <form class="movie-submit" >
       <div class="movie-submit">
        <label for="name">Film name: </label>
        <input type="text" name="name" id="newTitle"
@@ -149,7 +164,7 @@ return (
     name="genre" id="newGenre" required></input>
   </div>
   <div class="movie-submit">
-    <input type="submit" value="Add Film">
+    <input type="submit" value="Add Film" onClick={this.handleSubmit}>
     </input>
   </div>
 
