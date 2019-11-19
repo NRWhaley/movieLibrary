@@ -20,12 +20,16 @@ class App extends React.Component {
 
     this.state = {
       movies: [{name: 'default', year: '', genre: ''}, {name: '', year: '', genre: ''}, {name: '', year: '', genre: ''}],
-      randomMovie: {name: '', year: '', genre: ''}
+      randomMovie: {name: '', year: '', genre: ''},
+      newTitle: '',
+      newGenre: '',
+      newYear: ''
     }
 
     this.selectRandom = this.selectRandom.bind(this)
     this.componentDidMount = this.componentDidMount.bind(this)
     this.addMovie = this.addMovie.bind(this)
+    this.addToCollection = this.addToCollection.bind(this)
 
   }
 
@@ -86,11 +90,14 @@ addMovie = async () => {
 }
 
 
+addToCollection() {
+
+}
 
 
   render() {
 
-    if(this.state.movies[0].name != 'default'){
+    if(this.state.movies[0].name !== 'default'){
     let stringList = []
 
     for(let i = 0; i < this.state.movies.length; i++){
@@ -122,18 +129,20 @@ return (
     <form class="movie-submit">
       <div class="movie-submit">
        <label for="name">Film name: </label>
-       <input type="text" name="name" id="name" required></input>
+       <input type="text" name="name" id="name" value={this.state.newTitle} required></input>
       </div>
       <div class="movie-submit">
         <label for="year">Year: </label>
-        <input type="year" name="year" id="year" required></input>
+        <input type="year" value={this.state.newYear} name="year" id="year" required></input>
        </div>
   <div class="movie-submit">
     <label for="genre">Genre: </label>
-    <input type="text" name="genre" id="genre" required></input>
+    <input type="text" value={this.state.newGenre} name="genre" id="genre" required></input>
   </div>
   <div class="movie-submit">
-    <input type="submit" value="Add film"></input>
+    <input type="submit" value="Add film"
+    onClick = {this.addToCollection}
+    ></input>
   </div>
 
 </form>
