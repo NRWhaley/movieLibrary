@@ -91,9 +91,9 @@ addMovie = async () => {
 
 handleSubmit(e){
   e.preventDefault()
-  let newFilm = document.getElementById('newTitle').value;
-  let newYear = document.getElementById('newYear').value;
-  let newGenre = document.getElementById('newGenre').value;
+  let newFilm = (document.getElementById('newTitle').value).replace(/[&+()$~%."*?<>]/g,'');
+  let newYear = (document.getElementById('newYear').value).replace(/[&+()$~%."*?<>]/g,'');
+  let newGenre = (document.getElementById('newGenre').value).replace(/[&+()$~%."*?<>]/g,'');
 
   let newEntry = {
     name: newFilm,

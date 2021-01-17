@@ -6,9 +6,18 @@ const bodyParser = require('body-parser')
 const express = require('express');
 const app = express();
 
-const port = process.env.PORT || 5000;
+/*
+mongoDB below this line.
+*/
 
-const jsonParse = bodyParser.json()
+
+
+/*
+ mongoDB set up and other imports above this line
+*/
+
+const port = process.env.PORT || 5000;
+const jsonParse = bodyParser.json();
 const urlencodedParse = bodyParser.urlencoded({extended: false})
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
